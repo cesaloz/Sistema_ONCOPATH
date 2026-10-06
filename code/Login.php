@@ -1,6 +1,6 @@
 <?php
 require_once 'config/inic.php';
-
+ 
 // Si ya está logueado, redirigir al Dashboard
 if (isset($_SESSION['id_usuario'])) {
     header('location: Dashboard.php');
