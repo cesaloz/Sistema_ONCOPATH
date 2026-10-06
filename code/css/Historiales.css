@@ -1,0 +1,542 @@
+
+
+/* ===== HEADER DEL CONTENIDO ===== */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.8rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.content-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.2rem;
+}
+
+/* ===== PESTAÑAS ===== */
+.tabs-nav {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--white);
+    padding: 0.6rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.tab-btn:hover:not(:disabled) {
+    background-color: #eff6ff;
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(9, 140, 215, 0.25);
+}
+
+.tab-btn:disabled,
+.tab-btn.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== TABLA DE PACIENTES ===== */
+.table-container {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.table-header h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dark);
+}
+
+.count-badge {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 50px;
+}
+
+.search-input {
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    min-width: 280px;
+    font-family: inherit;
+    transition: border 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(9, 140, 215, 0.12);
+}
+
+#tablaPacientes {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+#tablaPacientes thead {
+    background-color: var(--bg-color);
+}
+
+#tablaPacientes th {
+    text-align: left;
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#tablaPacientes td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-dark);
+    vertical-align: middle;
+}
+
+#tablaPacientes tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#tablaPacientes tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+#tablaPacientes tbody tr.selected {
+    background-color: #eff6ff;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* ===== BOTÓN SELECCIONAR ===== */
+.btn-select-paciente {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: background 0.2s ease;
+}
+
+.btn-select-paciente:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ===== AVISO PACIENTE SELECCIONADO ===== */
+.paciente-seleccionado {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding: 0.9rem 1.2rem;
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 10px;
+    color: #166534;
+    font-size: 0.9rem;
+}
+
+.paciente-seleccionado i {
+    font-size: 1.3rem;
+    color: #16a34a;
+}
+
+.paciente-seleccionado strong {
+    font-weight: 700;
+    margin-right: 0.3rem;
+}
+
+/* ===== CARD INFO PACIENTE ===== */
+.paciente-info-card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #10b981;
+}
+
+.paciente-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #098cd7, #633ab6);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.paciente-detalles h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+}
+
+.paciente-detalles p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.paciente-detalles p i {
+    color: var(--primary-color);
+    margin-right: 0.3rem;
+}
+
+/* ===== FILTROS ===== */
+.filters-bar {
+    background-color: var(--white);
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    background: #ffffff;
+    outline: none;
+    font-family: inherit;
+    transition: border 0.2s ease;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(9, 140, 215, 0.12);
+}
+
+.clear-filters {
+    background-color: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 38px;
+    transition: background 0.2s ease;
+}
+
+.clear-filters:hover {
+    background-color: #cbd5e1;
+}
+
+/* ===== LISTA DE HISTORIALES ===== */
+.historiales-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.historial-card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.historial-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.historial-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.historial-icon.hemato      { background-color: #098cd7; }
+.historial-icon.cirugía,
+.historial-icon.cirugia     { background-color: #f59e0b; }
+.historial-icon.mamografía,
+.historial-icon.mamografia  { background-color: #ec4899; }
+
+.historial-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.historial-info h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+}
+
+.historial-info p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.historial-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--text-light);
+}
+
+.historial-meta span i {
+    color: var(--primary-color);
+    margin-right: 0.3rem;
+}
+
+.historial-acciones {
+    display: flex;
+    gap: 0.3rem;
+    flex-shrink: 0;
+}
+
+.historial-acciones .action-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0.45rem 0.55rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.historial-acciones .action-btn.view { color: var(--primary-color); }
+.historial-acciones .action-btn.view:hover { background-color: #eff6ff; }
+
+.historial-acciones .action-btn.Descarga { color: #dc2626; }
+.historial-acciones .action-btn.Descarga:hover { background-color: #fee2e2; }
+
+/* ===== ESTADO VACÍO ===== */
+.historiales-vacio {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-light);
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.historiales-vacio i {
+    font-size: 2.5rem;
+    color: #cbd5e1;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.historiales-vacio p {
+    font-size: 0.95rem;
+}
+
+/* ===== BOTONES FINALES ===== */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    padding: 1rem 0 2rem;
+    margin-top: 0.5rem;
+}
+
+.action-btn {
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.save-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(9, 140, 215, 0.25);
+}
+
+.save-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+.cancel-btn:hover {
+    background-color: #cbd5e1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+    .search-input {
+        min-width: 100%;
+    }
+    .table-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filters-bar {
+        flex-direction: column;
+    }
+    .historial-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .historial-acciones {
+        align-self: flex-end;
+    }
+}
+
+/* ===== COLORES POR TIPO DE HISTORIA ===== */
+.historial-icon.blue    { background-color: #098cd7; }
+.historial-icon.orange  { background-color: #f59e0b; }
+.historial-icon.pink    { background-color: #ec4899; }
+
+/* Borde izquierdo según tipo */
+.historial-card.hemato      { border-left-color: #098cd7; }
+.historial-card.cirugía,
+.historial-card.cirugia     { border-left-color: #f59e0b; }
+.historial-card.mamografía,
+.historial-card.mamografia  { border-left-color: #ec4899; }
+
+/* Badge de tipo */
+.badge-tipo {
+    padding: 0.15rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-tipo.blue   { background-color: #dbeafe; color: #1e40af; }
+.badge-tipo.orange { background-color: #fef3c7; color: #b45309; }
+.badge-tipo.pink   { background-color: #fce7f3; color: #be185d; }

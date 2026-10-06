@@ -1,0 +1,102 @@
+<?php
+
+require_once '../config/inic.php';
+verificar_sesion();
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONCOPATH - Historia Clínica Cirugía</title>
+    <link rel="stylesheet" href="../css/Base.css">
+    <link rel="stylesheet" href="css/HCCirugia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <header class="BarraSuperior">
+            <div class="BarraIzq">
+                <i class="fas fa-hospital-user logo-icon"></i>
+                <h1>Oncopath</h1>
+            </div>
+
+            <div class="BarraDere">
+                <div class="user-info">
+                    <i class="fas fa-user-circle user-avatar"></i>
+                    <span class="user-name"><?php echo htmlspecialchars($_SESSION['nombre_completo']); ?></span>
+                </div>
+                <button class="logout-btn" onclick="cerrarSesion()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="../Dashboard.php"><i class="fas fa-chart-pie"></i> Inicio</a></li>
+                        <li><a href="../pacientes.php"><i class="fas fa-users"></i> Pacientes</a></li>
+
+                        <li class="has-submenu open">
+                            <a href="../HCHemato.php" class="active menu-toggle" class="menu-toggle" onclick="toggleSubmenu(event)">
+                                <i class="fas fa-edit"></i> Llenado de Historial
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="Registro_Paciente.php"><i class="fas fa-user-plus"></i> REGISTRO DE PACIENTES</a></li>
+                                <li><a href="HCHemato.php"><i class="fas fa-microscope"></i> HISTORIA CLÍNICA HEMATO</a></li>
+                                <li><a href="HCCirugia.php" class="active1"><i class="fas fa-notes-medical"></i> HISTORIA CLÍNICA CIRUGÍA</a></li>
+                                <li><a href="HCMamografia.php"><i class="fas fa-clipboard-list"></i> HISTORIA CLÍNICA MAMOGRAFÍA</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="../diagnostico.php"><i class="fas fa-stethoscope"></i> Diagnóstico</a></li>
+                        <li><a href="../consulta.php"><i class="fas fa-comments"></i> Consulta</a></li>
+                        <li><a href="../cirugia.php"><i class="fas fa-syringe"></i> Cirugía</a></li>
+                        <li><a href="../Historiales.php"><i class="fas fa-file-medical"></i> Historiales</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="content">
+
+                <div class="content-header">
+                    <div>
+                        <h2>REGISTRO DE HISTORIA CLÍNICA DE CIRUGÍA - ONCOLOGIA</h2>
+                        <p class="subtitle">Complete todos los datos para registrar la historia quirúrgica del paciente</p>
+                    </div>
+                    <button type="button" class="btn-secondary" onclick="window.location.href='pacientes.html'">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                </div>
+
+                <!-- Aquí irá el formulario de Cirugía -->
+
+                <section class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon orange"><i class="fas fa-tools"></i></div>
+                        <div>
+                            <h3>Módulo en construcción</h3>
+                            <p>Este formulario se agregará próximamente</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.6;">
+                        Aquí irán los campos correspondientes a la <strong>Historia Clínica de Cirugía</strong>.
+                        Cuando tengas definidos los campos, los agregamos con la misma estructura de secciones y pestañas.
+                    </p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+                    <script src="../JS/Sesion.JS"></script>
+</body>
+</html>
