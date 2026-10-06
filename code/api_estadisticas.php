@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once 'config/inic.php';
 verificar_sesion();
 
