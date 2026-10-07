@@ -315,3 +315,66 @@ body {
     align-items: center;
     gap: 1.5rem;
 }
+
+
+/* ===================================================================
+   ONCOPATH - ValidacionCampos.css
+   Validación visual de campos obligatorios
+   =================================================================== */
+
+/* ===== 1. CAMPO CON ERROR (borde rojo + fondo rojo claro) ===== */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* ===== 2. CAMPO VÁLIDO (borde verde) ===== */
+.form-group input.valido,
+.form-group select.valido,
+.form-group textarea.valido {
+    border-color: #10b981;
+}
+
+/* ===== 3. MENSAJE DE ERROR DEBAJO DEL CAMPO ===== */
+.mensaje-error {
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: 500;
+    min-height: 14px;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ===== 4. GRUPOS DE RADIO/CHECKBOX CON ERROR ===== */
+.radio-group.error,
+.checkbox-group.error {
+    padding: 6px;
+    border-radius: 8px;
+    background-color: #fef2f2;
+    border: 1px solid #ef4444;
+}
+
+/* ===== 5. MENSAJE DE ERROR PARA GRUPOS (RADIO/CHECKBOX) ===== */
+.mensaje-error-grupo {
+    display: block;
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: 500;
+    min-height: 14px;
+    margin-top: 2px;
+    margin-left: 0.2rem;
+}
+
+/* ===== 6. ANIMACIÓN DE SACUDIDA CUANDO HAY ERROR ===== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+.form-group input.error:focus {
+    animation: shake 0.2s ease;
+}

@@ -19,8 +19,6 @@ verificar_sesion();
 
     <div class="dashboard-container">
 
-        <div class="dashboard-container">
-
         <header class="BarraSuperior">
             <div class="BarraIzq">
                 <i class="fas fa-hospital-user logo-icon"></i>
@@ -86,7 +84,7 @@ verificar_sesion();
                     </button>
                 </div>
 
-                <form id="formPaciente" onsubmit="event.preventDefault();">
+                <form id="formPaciente">
 
 <!--TAB 1-->
                     <div id="datos-personales" class="tab-content active">
@@ -101,9 +99,9 @@ verificar_sesion();
                             </div>
 
                             <div class="form-grid grid-3">
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="institucion">Institución de Adscripción *</label>
-                                    <select id="institucion" name="institucion">
+                                    <select id="institucion" name="institucion" required>
                                         <option value="">-- Seleccione --</option>
                                         <option value="IVSS">IVSS</option>
                                         <option value="MSDS">MSDS</option>
@@ -111,14 +109,13 @@ verificar_sesion();
                                         <option value="PRIVADO">Privado</option>
                                         <option value="OTRA">Otra</option>
                                     </select>
-
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="establecimiento">Nombre del Establecimiento *</label>
                                     <input type="text" id="establecimiento" name="establecimiento" placeholder="Ej: Hospital Central" required
                                     oninput="soloLetras(this)" data-solo-letras>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="fechaReferencia">Fecha de la Referencia *</label>
                                     <input type="date" id="fechaReferencia" name="fechaReferencia" required>
                                 </div>
@@ -139,21 +136,21 @@ verificar_sesion();
                                     <label for="fecha">Fecha del Registro *</label>
                                     <input type="date" id="fecha" name="fecha" value="<?php echo date('Y-m-d');?>" readonly required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="numeroHistoria">Número de Historia *</label>
                                     <input type="number" id="numeroHistoria" name="numeroHistoria" placeholder="Ej: 1001" min="1" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="nombres">Nombres *</label>
                                     <input type="text" id="nombres" name="nombres" placeholder="Ej: Juan Carlos" required
                                      oninput="soloLetras(this)" data-solo-letras>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="apellidos">Apellidos *</label>
                                     <input type="text" id="apellidos" name="apellidos" placeholder="Ej: Pérez Rodríguez" required
                                     oninput="soloLetras(this)" data-solo-letras>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label>Tipo de Documento *</label>
                                     <div class="checkbox-group">
                                         <label class="check-item"><input type="radio" name="tipoDocumento" value="V" required><span>V</span></label>
@@ -161,13 +158,13 @@ verificar_sesion();
                                         <label class="check-item"><input type="radio" name="tipoDocumento" value="J"><span>J</span></label>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="cedula">Documento de Identificación (Cédula) *</label>
                                     <input type="text" id="cedula" name="cedula" placeholder="Ej: 12345678"
-                                           inputmode="numeric" pattern="[0-9]{7,8}" maxlength="8" minlength="8" title="Solo se permiten números" required
+                                           inputmode="numeric" pattern="[0-9]{7,8}" maxlength="8" minlength="7" title="Solo se permiten números" required
                                            oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label for="fechaNacimiento">Fecha de Nacimiento *</label>
                                     <input type="date" id="fechaNacimiento" name="fechaNacimiento" required onchange="calcularEdad()">
                                 </div>
@@ -175,7 +172,7 @@ verificar_sesion();
                                     <label for="edad">Edad *</label>
                                     <input type="number" id="edad" name="edad" placeholder="Se calcula automáticamente" min="0" max="120" step="1" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group prioridad">
                                     <label>Sexo *</label>
                                     <div class="radio-group">
                                         <label class="radio-item"><input type="radio" name="sexo" value="Masculino" required><span>Masculino</span></label>
@@ -211,39 +208,39 @@ verificar_sesion();
                                     <h4 class="sub-title"><i class="fas fa-baby"></i> Lugar de Nacimiento</h4>
                                     <div class="form-group">
                                         <label for="nacEstado">Estado</label>
-                                    <select id="nacEstado" name="nacEstado" onchange="cargarMunicipios('nac')">
-                                        <option value="">>-- Seleccione --<</option>
-                                    </select>
+                                        <select id="nacEstado" name="nacEstado" onchange="cargarMunicipios('nac')">
+                                            <option value="">-- Seleccione --</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                    <label for="nacMunicipio">Municipio</label>
-                                    <select id="nacMunicipio" name="nacMunicipio" onchange="cargarParroquias('nac')">
-                                        <option value="">Seleccionar estado primero</option>
-                                    </select>
+                                        <label for="nacMunicipio">Municipio</label>
+                                        <select id="nacMunicipio" name="nacMunicipio" onchange="cargarParroquias('nac')">
+                                            <option value="">Seleccionar estado primero</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                    <label for="nacParroquia">Parroquia</label>
-                                    <select id="nacParroquia" name="nacParroquia">
-                                        <option value="">Seleccionar municipio primero</option>
-                                    </select>
+                                        <label for="nacParroquia">Parroquia</label>
+                                        <select id="nacParroquia" name="nacParroquia">
+                                            <option value="">Seleccionar municipio primero</option>
+                                        </select>
                                     </div>
 
-                                <div class="form-group">
-                                    <label for="nacPais">País</label>
-                                    <input type="text" id="nacPais" name="nacPais" value="Venezuela">
+                                    <div class="form-group">
+                                        <label for="nacPais">País</label>
+                                        <input type="text" id="nacPais" name="nacPais" value="Venezuela">
+                                    </div>
                                 </div>
-                            </div>
 
                                 <div class="sub-column">
-                                        <h4 class="sub-title"><i class="fas fa-map-pin"></i> Lugar de Procedencia</h4>
+                                    <h4 class="sub-title"><i class="fas fa-map-pin"></i> Lugar de Procedencia</h4>
 
                                     <div class="form-group">
                                         <label for="proEstado">Estado</label>
-                                            <select id="proEstado" name="proEstado" onchange="cargarMunicipios('pro')">
-                                                <option value="">Seleccionar...</option>
-                                            </select>
+                                        <select id="proEstado" name="proEstado" onchange="cargarMunicipios('pro')">
+                                            <option value="">Seleccionar...</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -252,24 +249,24 @@ verificar_sesion();
                                             <option value="">Seleccionar estado primero</option>
                                         </select>
                                     </div>
-                                        <div class="form-group">
-                                            <label for="proParroquia">Parroquia</label>
-                                            <select id="proParroquia" name="proParroquia">
-                                                <option value="">Seleccionar municipio primero</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="proPais">País</label>
-                                            <input type="text" id="proPais" name="proPais" value="Venezuela">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="proParroquia">Parroquia</label>
+                                        <select id="proParroquia" name="proParroquia">
+                                            <option value="">Seleccionar municipio primero</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="proPais">País</label>
+                                        <input type="text" id="proPais" name="proPais" value="Venezuela">
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="direccionHabitacion">Dirección de Habitación</label>
+                                    <label for="direccionHabitacion">Dirección de Habitación*</label>
                                     <input type="text" id="direccionHabitacion" name="direccionHabitacion" placeholder="Ej: Av. Principal, Casa 12">
                                 </div>
                                 <div class="form-group">
-                                    <label for="direccionContacto">Dirección de Contacto</label>
+                                    <label for="direccionContacto">Dirección de Contacto*</label>
                                     <input type="text" id="direccionContacto" name="direccionContacto" placeholder="Ej: Av. Secundaria, Apto 3B">
                                 </div>
                             </div>
@@ -284,22 +281,26 @@ verificar_sesion();
                                 </div>
                             </div>
 
-                                <div class="form-grid grid-2">
+                            <div class="form-grid grid-2">
                                 <div class="form-group">
                                     <label for="ocupacion">Ocupación</label>
-                                    <input type="text" id="ocupacion" name="ocupacion" placeholder="Ej: Comerciante" maxlength="45" minlength="45" oninput="soloLetras(this)" data-solo-letras>
+                                    <input type="text" id="ocupacion" name="ocupacion" placeholder="Ej: Comerciante" maxlength="45"
+                                    oninput="soloLetras(this)" data-solo-letras>
                                 </div>
                                 <div class="form-group">
                                     <label for="aniosOcupacion">Años de Ocupación</label>
-                                    <input type="number" id="aniosOcupacion" name="aniosOcupacion" placeholder="Ej: 5 años" min="0" max="80" oninput="soloNumeros(this)" data-solo-numeros>
+                                    <input type="number" id="aniosOcupacion" name="aniosOcupacion" placeholder="Ej: 5" min="0" max="80"
+                                    oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
                                 <div class="form-group">
                                     <label for="profesion">Profesión</label>
-                                    <input type="text" id="profesion" name="profesion" placeholder="Ej: Ingeniero" maxlength="45" minlength="45" oninput="soloLetras(this)" data-solo-letras>
+                                    <input type="text" id="profesion" name="profesion" placeholder="Ej: Ingeniero" maxlength="45"
+                                    oninput="soloLetras(this)" data-solo-letras>
                                 </div>
                                 <div class="form-group">
                                     <label for="aniosEjercidos">Años Ejercidos</label>
-                                    <input type="text" id="aniosEjercidos" name="aniosEjercidos" placeholder="Ej: 10" maxlength="2" minlength="1" oninput="soloNumeros(this)" data-solo-numeros>
+                                    <input type="text" id="aniosEjercidos" name="aniosEjercidos" placeholder="Ej: 10" maxlength="2"
+                                    oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
                             </div>
                         </section>
@@ -320,73 +321,29 @@ verificar_sesion();
                                     oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 04141234567" inputmode="numeric"
+                                    <label for="telefono">Teléfono*</label>
+                                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 04141234567" required inputmode="numeric"
                                     oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefono2">Segundo Teléfono</label>
-                                    <input type="tel" id="telefono2" name="telefono2" placeholder="Ej: 04241234567" inputmode="numeric"
+                                    <label for="telefono2">Segundo Teléfono*</label>
+                                    <input type="tel" id="telefono2" name="telefono2" placeholder="Ej: 04241234567" required inputmode="numeric"
                                     oninput="soloNumeros(this)" data-solo-numeros>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Correo Electrónico</label>
-                                    <input type="email" id="email" name="email" placeholder="Ej: correo@ejemplo.com"
+                                    <label for="email">Correo Electrónico*</label>
+                                    <input type="email" id="email" name="email" placeholder="Ej: correo@ejemplo.com" required
                                     oninput="validarEmail(this)">
                                 </div>
                             </div>
                         </section>
 
                     </div>
-                    <!-- ===== TAB 3: PLAN DE TRATAMIENTO ===== -->
-                    <div id="plan-tratamiento" class="tab-content">
-
-                        <section class="form-section">
-                            <div class="section-header">
-                                <div class="section-icon purple"><i class="fas fa-clipboard-list"></i></div>
-                                <div>
-                                    <h3>Plan de Tratamiento</h3>
-                                    <p>Esquema y observaciones del tratamiento</p>
-                                </div>
-                            </div>
-
-                            <div class="form-grid grid-2">
-                                <div class="form-group">
-                                    <label for="tipoTratamiento">Tipo de Tratamiento</label>
-                                    <input list="trata" id="tipoTratamiento" name="tipoTratamiento" placeholder="Escribe el tratamiento...">
-                                    <datalist id="trata">
-                                        <option value="Quimioterapia">
-                                        <option value="Radioterapia">
-                                        <option value="Cirugía">
-                                        <option value="Inmunoterapia">
-                                        <option value="Hormonoterapia">
-                                        <option value="Cuidados Paliativos">
-                                    </datalist>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ciclos">Ciclos / Sesiones</label>
-                                    <input type="number" id="ciclos" name="ciclos" min="0" placeholder="Ej: 6">
-                                </div>
-                                <div class="form-group full-width">
-                                    <label for="descripcionTratamiento">Descripción del Tratamiento</label>
-                                    <textarea id="descripcionTratamiento" name="descripcionTratamiento" rows="3"
-                                              placeholder="Detalle del esquema, medicamentos, dosis..."></textarea>
-                                </div>
-                                <div class="form-group full-width">
-                                    <label for="observacionesTratamiento">Observaciones</label>
-                                    <textarea id="observacionesTratamiento" name="observacionesTratamiento" rows="3"
-                                              placeholder="Notas adicionales del plan..."></textarea>
-                                </div>
-                            </div>
-                        </section>
-
-                    </div>
-
                     <div class="form-actions">
                         <button type="button" class="action-btn cancel-btn" onclick="limpiarFormulario()">
                             <i class="fas fa-eraser"></i> Limpiar
                         </button>
-                        <button type="submit" class="action-btn save-btn" onclick="guardarPaciente()">
+                        <button type="submit" class="action-btn save-btn">
                             <i class="fas fa-save"></i> Guardar Paciente
                         </button>
                     </div>
@@ -396,18 +353,11 @@ verificar_sesion();
             </main>
         </div>
     </div>
-                    <script src="../JS/Sesion.JS"></script>
-                    <script src="../JS/regis.js"></script>
-                    <script src="../js/ubicacion.js"></script>
-                    <script src="../js/Validar.js"></script>
 
-
-
-
-
-
-                    
-
+    <script src="../JS/Sesion.JS"></script>
+    <script src="../js/Validar.js"></script>
+    <script src="../js/regis.js"></script>
+    <script src="../js/ubicacion.js"></script>
 
 </body>
 </html>

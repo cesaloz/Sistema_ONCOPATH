@@ -21,6 +21,7 @@ define('APP_VERSION', '1.0');
 define('APP_INSTITUTION', 'Servicio Desconcentrado Especializado en Diagnóstico y Tratamiento de Enfermedades Oncológicas del Estado Lara');
 
 require_once __DIR__ . '/conecion.php';
+require_once __DIR__ . '/permisos.php';
 
 
 function verificar_sesion() {

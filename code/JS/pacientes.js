@@ -44,26 +44,14 @@ function filtrarTabla() {
 
         
         const coincideEstado = !estadoFiltro || estado === estadoFiltro;
-<<<<<<< Updated upstream
-
-        let coincideFecha = true;
-        if (fechaFiltro) {
-=======
         
         let coincideFecha = true;
             if (fechaFiltro) {
->>>>>>> Stashed changes
                 const [year, month, day] = fechaFiltro.split("-");
                 const fechaFormateada = `${day}/${month}/${year}`;
                 
                 coincideFecha = (fecha === fechaFormateada);
             }
-<<<<<<< Updated upstream
-
-
-
-=======
->>>>>>> Stashed changes
 
         if (coincideTexto && coincideEstado && coincideFecha) {
             fila.style.display = "";

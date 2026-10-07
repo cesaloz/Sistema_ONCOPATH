@@ -3,53 +3,19 @@ async function guardarPaciente() {
     const form = document.getElementById("formPaciente");
     if (!form) return;
 
-    // Validaciones básicas
-    const obligatorios = [
-        { id: "institucion",     nombre: "Institución de Adscripción" },
-        { id: "establecimiento", nombre: "Nombre del Establecimiento" },
-        { id: "fechaReferencia", nombre: "Fecha de la Referencia" },
-        { id: "fecha",           nombre: "Fecha del Registro" },
-        { id: "numeroHistoria",  nombre: "Número de Historia" },
-        { id: "nombres",         nombre: "Nombres" },
-        { id: "apellidos",       nombre: "Apellidos" },
-        { id: "cedula",          nombre: "Cédula" },
-        { id: "fechaNacimiento", nombre: "Fecha de Nacimiento" },
-        { id: "edad",            nombre: "Edad" },
-        { id: "raza",            nombre: "Raza" }
-    ];
-
-    for (const campo of obligatorios) {
-        const el = document.getElementById(campo.id);
-        if (!el) continue;
-        if (!el.value || el.value.trim() === "") {
-            mostrarTab(null, "datos-personales");
-            el.style.borderColor = "#dc2626";
-            el.focus();
-            alert(`⚠️ Falta completar: ${campo.nombre}`);
-            return;
-        }
-    }
-
-    const tipoDoc = form.querySelector('input[name="tipoDocumento"]:checked');
-    if (!tipoDoc) {
-        alert("⚠️ Debe seleccionar el Tipo de Documento (V / E / J).");
-        return;
-    }
-
-    const sexo = form.querySelector('input[name="sexo"]:checked');
-    if (!sexo) {
-        alert("⚠️ Debe seleccionar el Sexo del paciente.");
-        return;
+    // Validación visual (por si se llama directo sin pasar por submit)
+    if (typeof validarFormularioCompleto === 'function') {
+        const ok = validarFormularioCompleto();
+        if (!ok) return;
     }
 
     // === ENVIAR AL SERVIDOR ===
     const formData = new FormData(form);
 
-    // Deshabilitar botón
     const btnGuardar = form.querySelector('button[type="submit"]');
     if (btnGuardar) {
         btnGuardar.disabled = true;
-        btnGuardar.textContent = "Guardando...";
+        btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
     }
 
     try {
@@ -61,18 +27,25 @@ async function guardarPaciente() {
         const data = await respuesta.json();
 
         if (data.success) {
-            alert(`✅ Paciente registrado correctamente.\nID: ${data.id_paciente}`);
-            window.location.href = "../Pacientes.php";
+            // Toast de éxito
+            mostrarMensajeGlobal(
+                `✅ Paciente registrado correctamente. ID: ${data.id_paciente}`,
+                "success"
+            );
+            // Redirigir después de mostrar el mensaje
+            setTimeout(() => {
+                window.location.href = "../Pacientes.php?registro=ok&id=" + data.id_paciente;
+            }, 1800);
         } else {
-            alert(`❌ Error: ${data.message}`);
+            mostrarMensajeGlobal(data.message || "Error al guardar", "error");
         }
     } catch (error) {
         console.error("Error detallado:", error);
-        alert("❌ Error de conexión. Revise la consola (F12).");
+        mostrarMensajeGlobal("Error de conexión. Revise la consola (F12).", "error");
     } finally {
         if (btnGuardar) {
             btnGuardar.disabled = false;
-            btnGuardar.textContent = "Guardar Paciente";
+            btnGuardar.innerHTML = '<i class="fas fa-save"></i> Guardar Paciente';
         }
     }
 }
@@ -93,3 +66,17 @@ function calcularEdad() {
     if (campoEdad) campoEdad.value = edad;
 }
 
+/* ===== TOAST GLOBAL ===== */
+function mostrarMensajeGlobal(mensaje, tipo = "info") {
+    let toast = document.getElementById("toast-global");
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "toast-global";
+        document.body.appendChild(toast);
+    }
+    toast.textContent = mensaje;
+    toast.className = "toast-visible " + tipo;
+    setTimeout(() => {
+        toast.className = "";
+    }, 4000);
+}
