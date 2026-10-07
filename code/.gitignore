@@ -1,0 +1,43 @@
+# ============================================
+# ARCHIVOS SENSIBLES - NO SUBIR A GITHUB
+# ============================================
+
+# Archivo de configuración con credenciales reales
+.env
+.env.local
+.env.*.local
+
+# Configuración del editor (contiene credenciales de SQLTools)
+.vscode/settings.json
+.vscode/*.session
+
+# Sesiones de SQLTools
+*.session
+Oncologia*.session
+
+# Archivos de prueba (contienen info sensible)
+prueba_conexion.php
+test_conexion.php
+test.sql
+
+# Respaldos de PostgreSQL
+*.backup
+*.dump
+*.sql.gz
+*.tar
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+Thumbs.db
+desktop.ini
+
+# Node modules (si aplica)
+node_modules/
+
+# Composer (si aplica)
+/vendor/
+composer.lock

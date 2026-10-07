@@ -1,0 +1,17 @@
+# Archivo de configuración con credenciales
+.env
+
+# Configuración del editor (puede contener credenciales de SQLTools)
+.vscode/settings.json
+
+# Respaldos locales
+*.backup
+*.dump
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+Thumbs.db
+desktop.ini

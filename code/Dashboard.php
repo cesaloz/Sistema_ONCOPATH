@@ -78,10 +78,10 @@ registrar_actividad('Acceso al dashboard', 'sistema');
 
         <div class="main-content">
 
-            <aside class="sidebar">
+                        <aside class="sidebar">
                 <nav>
                     <ul>
-                        <li><a href="Dashboard.php" class="active"><i class="fas fa-chart-pie"></i> Inicio</a></li>
+                        <li><a href="Dashboard.php" class="active" ><i class="fas fa-chart-pie"></i> Inicio</a></li>
                         <li><a href="pacientes.php"><i class="fas fa-users"></i> Pacientes</a></li>
 
                         <li class="has-submenu">
