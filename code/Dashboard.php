@@ -7,10 +7,18 @@ try {
     $con = conexion::getConnection();
 
     $stats = [
+
+
+        'nuevos_semana' => $con->query("SELECT COUNT(*) FROM pacientes WHERE fecha_registro_sistema >= NOW() - INTERVAL '7 days' ")->fetchColumn(),
+
+
         'pacientes' => $con->query("SELECT COUNT(*) FROM pacientes")->fetchColumn(),
         'ciudades'  => $con->query("SELECT COUNT(*) FROM ciudades")->fetchColumn(),
         'estados'   => $con->query("SELECT COUNT(*) FROM estados")->fetchColumn(),
         'no_historia'=> $con->query("SELECT COUNT(*) FROM pacientes")->fetchColumn(),
+        'pacientes_activos' => $con->query("SELECT COUNT(*) FROM pacientes WHERE status = TRUE")->fetchColumn(),
+        'pacientes_inactivos' => $con->query("SELECT COUNT(*) FROM pacientes WHERE status = FALSE")->fetchColumn(),
+
     ];
 
     $stmt = $con->query("
@@ -27,8 +35,9 @@ try {
             edad,
             sexo,
             fecha_ingreso_sistema,
-            'Activo' AS estado
+            status
         FROM pacientes
+        WHERE status = TRUE
         ORDER BY id_paciente DESC
         LIMIT 5
     ");
@@ -155,26 +164,27 @@ registrar_actividad('Acceso al dashboard', 'sistema');
                     </div>
 
                     <div class="card">
-                        <div class="card-icon green"><i class="fas fa-calendar-day"></i></div>
+                        <div class="card-icon green"><i class="fas fa-heart-pulse"></i></div>
                         <div class="card-info">
-                            <h3>18</h3>
-                            <p>Citas Hoy</p>
+                            <h3><?php echo $stats['pacientes_activos']; ?></h3>
+                            <p>Pacientes Activos</p>
+
                         </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-icon orange"><i class="fas fa-notes-medical"></i></div>
+                        <div class="card-icon orange"><i class="fas fa-file-medical"></i></div>
                         <div class="card-info">
-                            <h3><?php echo $stats ['no_historia']; ?></h3>
-                            <p>Nuevos Registros</p>
+                            <h3><?php echo $stats ['nuevos_semana']; ?></h3>
+                            <p>Nuevos Registros Semanales</p>
                         </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-icon red"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="card-icon red"><i class="fas fa-user-minus"></i></div>
                         <div class="card-info">
-                            <h3><?php echo $stats ['ciudades']; ?></h3>
-                            <p>Casos Pendientes</p>
+                            <h3><?php echo $stats ['pacientes_inactivos']; ?></h3>
+                            <p>Pacientes Inactivos</p>
                         </div>
                     </div>
                 </section>
@@ -222,13 +232,17 @@ registrar_actividad('Acceso al dashboard', 'sistema');
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($ultimosPacientes as $p): ?>
-                                    <tr>
+                                    <tr >
                                         <td>#<?= htmlspecialchars($p['id_paciente']) ?></td>
                                         <td><?= htmlspecialchars($p['nombre_completo']) ?></td>
                                         <td><?= htmlspecialchars($p['edad']) ?></td>
                                         <td><?= htmlspecialchars($p['diagnostico'] ?? '—') ?></td>
                                         <td><?= date('d/m/Y', strtotime($p['fecha_ingreso_sistema'])) ?></td>
-                                        <td><span class="badge active"><?= htmlspecialchars($p['estado']) ?></span></td>
+                                        <td>
+                                            <span class="badge <?= $p['status'] ? 'active' : 'inactive' ?>">
+                                                <?= $p['status'] ? 'Activo' : 'Inactivo' ?>
+                                            </span>
+                                        </td>
                                         
                                     </tr>
                                 <?php endforeach; ?>

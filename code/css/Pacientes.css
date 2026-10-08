@@ -274,3 +274,50 @@ tbody tr:hover {
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Badge inactivo */
+.badge.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Botón reactivar */
+.action-btn.reactivate {
+    background: #dbeafe;
+    color: #1e40af;
+}
+.action-btn.reactivate:hover {
+    background: #bfdbfe;
+}
+
+
+
+.fila-inactiva {
+    opacity: 0.55;
+}
+
+.fila-paciente.oculta {
+    display: none;
+}

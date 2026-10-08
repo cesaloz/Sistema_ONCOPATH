@@ -18,6 +18,10 @@ try {
             p.id_paciente,
             p.no_historia,
             p.cedula,
+            p.primer_nombre,
+            p.segundo_nombre,
+            p.primer_apellido,
+            p.segundo_apellido,
             TRIM(
                 COALESCE(p.primer_nombre, '') || ' ' ||
                 COALESCE(p.segundo_nombre, '') || ' ' ||
